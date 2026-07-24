@@ -13,7 +13,8 @@ and healthcheck the service.
 - Basic authentication for public Eve session routes
 - Railway healthchecks and restart policy
 - Persistent local workflow-state storage
-- Revocable account API keys with a 20-request hourly setup limit
+- Revocable account API keys with a 10-request daily setup limit
+- Automatic registration in the authenticated EveAgents Agents Playground
 
 ## Common use cases
 

@@ -30,7 +30,7 @@ Add these variables in the composer:
 The fixed registry URL is a public HTTPS API endpoint, not a Supabase URL or
 credential. Never add an EveAgents Supabase key to this repository or template.
 The user's `EVEAGENTS_API_KEY` authenticates only to that endpoint and is limited
-to 20 bundle requests per hour.
+to 10 bundle requests per UTC day.
 
 The template supports `openai`, `anthropic`, and `google` model prefixes. The
 user selects a matching model and pastes that provider's key into
