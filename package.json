@@ -9,7 +9,7 @@
   "scripts": {
     "prepare:agent": "node --env-file-if-exists=.env scripts/prepare-agent.mjs",
     "build": "npm run prepare:agent && eve build",
-    "start": "node scripts/start.mjs",
+    "start": "eve start --host 0.0.0.0",
     "test": "node --test scripts/prepare-agent.test.mjs"
   },
   "dependencies": {

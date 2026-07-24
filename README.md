@@ -20,16 +20,9 @@ That is the only EveAgents key the template needs.
 5. The template replaces only the model, Eve web channel, and sandbox adapters
    needed for a portable Railway service.
 6. Eve builds and starts the selected agent on Railway's assigned `PORT`.
-7. After the healthcheck passes, the running service registers its generated
-   Railway domain with the owning EveAgents account so it appears in
-   [Agents Playground](https://www.eveagents.dev/dashboard/agents-playground).
 
 Each EveAgents API key can download an agent up to 10 times per UTC day. You
 can revoke a key at any time from the API Keys page.
-
-Agents Playground asks the user for the separate route username and password
-when they connect. The template does not send those route credentials to the
-registry, and EveAgents does not store them.
 
 ## Railway variables
 

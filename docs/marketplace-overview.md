@@ -14,7 +14,6 @@ and healthcheck the service.
 - Railway healthchecks and restart policy
 - Persistent local workflow-state storage
 - Revocable account API keys with a 10-request daily setup limit
-- Automatic registration in the authenticated EveAgents Agents Playground
 
 ## Common use cases
 
