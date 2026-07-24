@@ -1,9 +1,9 @@
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/eve-agent-template?referralCode=lAH3cp&utm_medium=integration&utm_source=template&utm_campaign=generic)
+
 # EveAgents Railway template
 
 Deploy one published [EveAgents](https://www.eveagents.dev) agent as a
 long-running Eve service on Railway.
-
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/eve-agent-template?referralCode=lAH3cp&utm_medium=integration&utm_source=template&utm_campaign=generic)
 
 1. Choose an agent on EveAgents.
 2. Create and copy a key from the [API Keys page](https://www.eveagents.dev/dashboard/api-keys).
