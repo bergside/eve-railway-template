@@ -13,7 +13,9 @@
     "test": "node --test scripts/prepare-agent.test.mjs"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^4.0.13",
+    "@ai-sdk/anthropic": "^4.0.19",
+    "@ai-sdk/google": "^4.0.23",
+    "@ai-sdk/openai": "^4.0.20",
     "@vercel/connect": "0.4.0",
     "ai": "^7.0.26",
     "eve": "0.25.2",

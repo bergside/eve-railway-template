@@ -30,8 +30,8 @@ revoke a key at any time from the API Keys page.
 | `EVE_INTEGRATION_SLUG` | Optional; blank for the base agent |
 | `EVEAGENTS_REGISTRY_URL` | Fixed template value: `https://www.eveagents.dev/api/registry/v1` |
 | `EVEAGENTS_API_KEY` | Your key from the EveAgents API Keys page |
-| `OPENAI_API_KEY` | Required user secret |
-| `EVE_MODEL` | Default: `gpt-5.4-mini` |
+| `EVE_PROVIDER_API_KEY` | Required API key for the provider selected by `EVE_MODEL` |
+| `EVE_MODEL` | Provider-qualified model ID; default: `openai/gpt-5.4-mini` |
 | `ROUTE_AUTH_BASIC_USER` | Default: `eve` |
 | `ROUTE_AUTH_BASIC_PASSWORD` | Generated with `${{ secret(32) }}` |
 
@@ -41,6 +41,17 @@ listed on the corresponding EveAgents integration page before deploying.
 `ROUTE_AUTH_BASIC_USER` and `ROUTE_AUTH_BASIC_PASSWORD` are separate from the
 EveAgents API key. Railway generates the password automatically; these values
 protect the deployed agent's public Eve routes from unauthorized use.
+
+The template currently supports OpenAI, Claude, and Gemini through the official
+AI SDK provider adapters. Use one matching pair:
+
+- `openai/gpt-5.4-mini` with an OpenAI API key
+- `anthropic/claude-sonnet-4-6` with a Claude API key
+- `google/gemini-3.6-flash` with a Gemini API key
+
+Paste the selected provider's secret into `EVE_PROVIDER_API_KEY`. The generic
+variable keeps the Railway template simple and prevents unused provider keys
+from being requested.
 
 ## Railway service settings
 

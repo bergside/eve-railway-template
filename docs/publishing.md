@@ -22,8 +22,8 @@ Add these variables in the composer:
 | `EVE_INTEGRATION_SLUG` | Optional, empty default; user-entered |
 | `EVEAGENTS_REGISTRY_URL` | Fixed to `https://www.eveagents.dev/api/registry/v1` |
 | `EVEAGENTS_API_KEY` | Required user-entered secret created in the EveAgents API Keys dashboard |
-| `OPENAI_API_KEY` | Required user-entered secret |
-| `EVE_MODEL` | Default `gpt-5.4-mini` |
+| `EVE_PROVIDER_API_KEY` | Required user-entered secret for the provider selected by `EVE_MODEL` |
+| `EVE_MODEL` | Provider-qualified model ID; default `openai/gpt-5.4-mini` |
 | `ROUTE_AUTH_BASIC_USER` | Default `eve` |
 | `ROUTE_AUTH_BASIC_PASSWORD` | Default `${{ secret(32) }}` |
 
@@ -31,6 +31,10 @@ The fixed registry URL is a public HTTPS API endpoint, not a Supabase URL or
 credential. Never add an EveAgents Supabase key to this repository or template.
 The user's `EVEAGENTS_API_KEY` authenticates only to that endpoint and is limited
 to 20 bundle requests per hour.
+
+The template supports `openai`, `anthropic`, and `google` model prefixes. The
+user selects a matching model and pastes that provider's key into
+`EVE_PROVIDER_API_KEY`; only one provider key is needed per deployment.
 
 ## Smoke test
 

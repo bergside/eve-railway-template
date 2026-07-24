@@ -340,12 +340,58 @@ async function writeAgentFile(root, filePath, contents) {
   await writeFile(destination, contents);
 }
 
-function railwayAgentDefinition() {
-  return `import { openai } from "@ai-sdk/openai";
+export function railwayAgentDefinition() {
+  return `import { createAnthropic } from "@ai-sdk/anthropic";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { createOpenAI } from "@ai-sdk/openai";
 import { defineAgent } from "eve";
 
+function requiredEnvironment(name: "EVE_PROVIDER_API_KEY") {
+  const value = process.env[name];
+
+  if (!value) {
+    throw new Error(\`\${name} is required.\`);
+  }
+
+  return value;
+}
+
+function configuredModel() {
+  const value = process.env.EVE_MODEL ?? "openai/gpt-5.4-mini";
+  const separatorIndex = value.indexOf("/");
+
+  if (separatorIndex <= 0 || separatorIndex === value.length - 1) {
+    throw new Error(
+      "EVE_MODEL must use provider/model format, for example openai/gpt-5.4-mini.",
+    );
+  }
+
+  return {
+    provider: value.slice(0, separatorIndex),
+    modelId: value.slice(separatorIndex + 1),
+  };
+}
+
+function createModel() {
+  const apiKey = requiredEnvironment("EVE_PROVIDER_API_KEY");
+  const { provider, modelId } = configuredModel();
+
+  switch (provider) {
+    case "openai":
+      return createOpenAI({ apiKey })(modelId);
+    case "anthropic":
+      return createAnthropic({ apiKey })(modelId);
+    case "google":
+      return createGoogleGenerativeAI({ apiKey })(modelId);
+    default:
+      throw new Error(
+        "EVE_MODEL provider must be openai, anthropic, or google.",
+      );
+  }
+}
+
 export default defineAgent({
-  model: openai(process.env.EVE_MODEL ?? "gpt-5.4-mini"),
+  model: createModel(),
 });
 `;
 }
@@ -395,7 +441,7 @@ export async function prepareAgent() {
     throw new Error("EVE_AGENT_SLUG is required.");
   }
 
-  requiredEnvironment("OPENAI_API_KEY");
+  requiredEnvironment("EVE_PROVIDER_API_KEY");
   requiredEnvironment("ROUTE_AUTH_BASIC_USER");
   requiredEnvironment("ROUTE_AUTH_BASIC_PASSWORD");
 

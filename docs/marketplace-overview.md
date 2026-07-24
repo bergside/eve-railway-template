@@ -9,7 +9,7 @@ and healthcheck the service.
 
 - Versioned, API-key-authenticated distribution without database keys
 - SHA-256 integrity validation for every agent file
-- Direct OpenAI model access
+- Direct OpenAI, Claude, or Gemini model access with one selected provider key
 - Basic authentication for public Eve session routes
 - Railway healthchecks and restart policy
 - Persistent local workflow-state storage

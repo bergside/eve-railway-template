@@ -6,6 +6,7 @@ import {
   createBundleUrl,
   missingRequiredEnvironment,
   normalizeRegistryUrl,
+  railwayAgentDefinition,
   requestDistributionBundle,
   validateDistributionBundle,
   validateRelativeFilePath,
@@ -104,6 +105,19 @@ test("reports only missing required integration variables", () => {
     missingRequiredEnvironment(requirements, { BOT_TOKEN: "secret" }),
     [],
   );
+});
+
+test("generates an Eve model definition for every supported provider", () => {
+  const definition = railwayAgentDefinition();
+
+  assert.match(definition, /@ai-sdk\/openai/);
+  assert.match(definition, /@ai-sdk\/anthropic/);
+  assert.match(definition, /@ai-sdk\/google/);
+  assert.match(definition, /EVE_PROVIDER_API_KEY/);
+  assert.match(definition, /"openai\/gpt-5\.4-mini"/);
+  assert.match(definition, /case "openai"/);
+  assert.match(definition, /case "anthropic"/);
+  assert.match(definition, /case "google"/);
 });
 
 test("authenticates every registry bundle request with the user API key", async () => {
